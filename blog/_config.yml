@@ -100,6 +100,7 @@ theme: even
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
   type: git
   repo: https://github.com/bayuncao/bayuncao.github.io.git
   branch: gh-pages
