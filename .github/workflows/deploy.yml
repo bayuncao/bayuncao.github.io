@@ -37,6 +37,9 @@ jobs:
       - name: Add .nojekyll file 📄
         run: touch out/.nojekyll
 
+      - name: Create CNAME file 📝
+        run: echo "bayuncao.github.io" > out/CNAME
+
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

@@ -22,9 +22,10 @@ const nextConfig = {
     parallelServerCompiles: true,
   },
   output: 'export',
-  images: {
-    unoptimized: true,
-  },
+  // For username.github.io repositories, basePath should be empty
+  basePath: '',
+  // For username.github.io repositories, assetPrefix should be empty
+  assetPrefix: '',
 }
 
 mergeConfig(nextConfig, userConfig)
