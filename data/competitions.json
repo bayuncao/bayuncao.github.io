@@ -1,0 +1,35 @@
+[
+  {
+    "id": "comp-1",
+    "name": "International CTF Championship",
+    "type": "Capture The Flag",
+    "location": "Online",
+    "date": "Nov 2023",
+    "rank": 2,
+    "description": "Competed in a team of 4 against 200+ international teams. Solved challenges in web exploitation, cryptography, reverse engineering, and forensics. Placed 2nd overall with a perfect score in the web category.",
+    "skills": ["Web Exploitation", "Cryptography", "Reverse Engineering", "Forensics"],
+    "writeupUrl": "https://example.com/writeups/intl-ctf-2023"
+  },
+  {
+    "id": "comp-2",
+    "name": "HackTheBox Pro Labs",
+    "type": "Penetration Testing",
+    "location": "Online",
+    "date": "Mar 2023",
+    "description": "Completed the 'Offshore' Pro Lab, a realistic corporate network environment with multiple interconnected systems. Successfully compromised all systems and achieved domain admin privileges through a sophisticated attack chain.",
+    "skills": ["Active Directory", "Windows Exploitation", "Privilege Escalation", "Lateral Movement"],
+    "writeupUrl": "https://example.com/writeups/htb-offshore"
+  },
+  {
+    "id": "comp-3",
+    "name": "Global Security Hackathon",
+    "type": "Hackathon",
+    "location": "Berlin, Germany",
+    "date": "Jun 2022",
+    "rank": 1,
+    "description": "Developed a novel security tool for detecting vulnerable dependencies in software supply chains. The tool combined static analysis with dynamic testing to identify potential security risks in third-party libraries.",
+    "skills": ["Python", "Static Analysis", "Software Composition Analysis", "DevSecOps"],
+    "writeupUrl": "https://example.com/projects/dependency-guardian"
+  }
+]
+

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "pres-1",
+    "title": "Advanced Web Application Attacks: Beyond OWASP Top 10",
+    "event": "BlackHat USA",
+    "location": "Las Vegas, NV",
+    "date": "Aug 2023",
+    "description": "A deep dive into sophisticated web application attack techniques that go beyond the OWASP Top 10, including advanced client-side attacks, server-side request forgery chains, and novel authentication bypass methods.",
+    "slidesUrl": "https://example.com/slides/blackhat-2023"
+  },
+  {
+    "id": "pres-2",
+    "title": "Securing Microservices: Challenges and Solutions",
+    "event": "AppSec Global",
+    "location": "Amsterdam, Netherlands",
+    "date": "Sep 2022",
+    "description": "Presented on the unique security challenges posed by microservice architectures and practical solutions for securing service-to-service communication, implementing proper authentication and authorization, and monitoring for security incidents.",
+    "slidesUrl": "https://example.com/slides/appsec-2022"
+  },
+  {
+    "id": "pres-3",
+    "title": "Building Secure APIs with GraphQL",
+    "event": "DEF CON",
+    "location": "Las Vegas, NV",
+    "date": "Jul 2021",
+    "description": "Explored security considerations specific to GraphQL APIs, including query complexity analysis, proper authorization, and preventing information disclosure. Demonstrated practical techniques for securing GraphQL implementations.",
+    "slidesUrl": "https://example.com/slides/defcon-2021"
+  }
+]
+

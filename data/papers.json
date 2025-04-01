@@ -1,0 +1,39 @@
+[
+  {
+    "id": "paper-1",
+    "title": "Novel Attack Vectors in Modern API Architectures",
+    "authors": ["Alex Chen", "Sarah Johnson", "Michael Lee"],
+    "abstract": "This paper explores emerging security vulnerabilities in modern API architectures, with a focus on GraphQL, gRPC, and REST implementations. We present several novel attack vectors that bypass traditional security controls and propose defensive strategies to mitigate these risks.",
+    "publishedDate": "Oct 2023",
+    "journal": "Journal of Cybersecurity Research",
+    "doi": "10.1234/jcs.2023.1234",
+    "keywords": ["API Security", "GraphQL", "gRPC", "Attack Vectors", "Web Security"],
+    "pdfUrl": "https://example.com/papers/api-attack-vectors.pdf",
+    "citationUrl": "https://example.com/citations/api-attack-vectors"
+  },
+  {
+    "id": "paper-2",
+    "title": "Automated Detection of Business Logic Vulnerabilities in Web Applications",
+    "authors": ["Alex Chen", "David Wang"],
+    "abstract": "Business logic vulnerabilities remain challenging to detect through automated means. This paper presents a novel approach combining symbolic execution and machine learning to identify potential business logic flaws in web applications without prior knowledge of the application's intended behavior.",
+    "publishedDate": "May 2022",
+    "conference": "IEEE Symposium on Security and Privacy",
+    "doi": "10.1109/sp.2022.00123",
+    "keywords": ["Business Logic Vulnerabilities", "Symbolic Execution", "Machine Learning", "Web Security"],
+    "pdfUrl": "https://example.com/papers/business-logic-detection.pdf",
+    "citationUrl": "https://example.com/citations/business-logic-detection"
+  },
+  {
+    "id": "paper-3",
+    "title": "Securing Containerized Applications: Challenges and Best Practices",
+    "authors": ["Alex Chen", "Jennifer Smith", "Robert Brown"],
+    "abstract": "Container technologies have revolutionized application deployment but introduced new security challenges. This paper analyzes common security issues in containerized environments and provides a comprehensive framework for securing containers throughout the development lifecycle.",
+    "publishedDate": "Dec 2021",
+    "journal": "ACM Transactions on Privacy and Security",
+    "doi": "10.1145/3456123.7890123",
+    "keywords": ["Container Security", "Docker", "Kubernetes", "DevSecOps", "Cloud Security"],
+    "pdfUrl": "https://example.com/papers/container-security.pdf",
+    "citationUrl": "https://example.com/citations/container-security"
+  }
+]
+

@@ -1,0 +1,33 @@
+[
+  {
+    "id": "job-1",
+    "title": "Senior Security Engineer",
+    "company": "CyberDefense Inc.",
+    "location": "Remote",
+    "startDate": "Jan 2021",
+    "endDate": null,
+    "description": "Lead security engineer responsible for conducting penetration tests, vulnerability assessments, and security architecture reviews for enterprise clients. Developed automated security testing tools and implemented secure CI/CD pipelines.",
+    "technologies": ["Python", "Go", "Docker", "Kubernetes", "AWS", "OWASP ZAP", "Burp Suite"]
+  },
+  {
+    "id": "job-2",
+    "title": "Security Researcher",
+    "company": "SecureTech Labs",
+    "location": "San Francisco, CA",
+    "startDate": "Mar 2018",
+    "endDate": "Dec 2020",
+    "description": "Conducted vulnerability research on web applications, mobile platforms, and IoT devices. Discovered and responsibly disclosed multiple zero-day vulnerabilities in popular software products. Published technical research papers and presented findings at security conferences.",
+    "technologies": ["Web Security", "Mobile Security", "IoT Security", "Reverse Engineering", "Exploit Development"]
+  },
+  {
+    "id": "job-3",
+    "title": "Full Stack Developer",
+    "company": "InnovateSoft",
+    "location": "Boston, MA",
+    "startDate": "Jun 2015",
+    "endDate": "Feb 2018",
+    "description": "Developed secure web applications and APIs for financial services clients. Implemented security best practices including secure authentication, authorization, input validation, and data encryption. Conducted code reviews and security assessments.",
+    "technologies": ["JavaScript", "TypeScript", "React", "Node.js", "Express", "MongoDB", "PostgreSQL"]
+  }
+]
+

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "feat-1",
+    "title": "SecureScanner v2.0",
+    "description": "Latest release of my popular security scanning tool with new features for API security testing",
+    "type": "project",
+    "link": "/projects"
+  },
+  {
+    "id": "feat-2",
+    "title": "Novel Attack Vectors in Modern API Architectures",
+    "description": "My recent research paper published in the Journal of Cybersecurity Research",
+    "type": "paper",
+    "link": "/papers"
+  },
+  {
+    "id": "feat-3",
+    "title": "BlackHat USA Presentation",
+    "description": "Advanced Web Application Attacks: Beyond OWASP Top 10",
+    "type": "presentation",
+    "link": "/experience"
+  }
+]
+

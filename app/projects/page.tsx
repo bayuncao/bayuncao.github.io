@@ -1,0 +1,341 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { getProjects } from "@/lib/data"
+import PageHeader from "@/components/page-header"
+import { useLanguage } from "@/lib/i18n/language-context"
+
+// IBM Carbon Design System inspired icons as SVG components
+const IBMIcons = {
+  Security: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M16 2L7 6V14.5C7 20.8 10.1 26.6 16 30C21.9 26.6 25 20.8 25 14.5V6L16 2Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M16 9V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 13H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  Authentication: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M16 20C18.2091 20 20 18.2091 20 16C20 13.7909 18.2091 12 16 12C13.7909 12 12 13.7909 12 16C12 18.2091 13.7909 20 16 20Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M16 20V24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M22 10H10C8.89543 10 8 10.8954 8 12V26C8 27.1046 8.89543 28 10 28H22C23.1046 28 24 27.1046 24 26V12C24 10.8954 23.1046 10 22 10Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 10V6C12 4.93913 12.4214 3.92172 13.1716 3.17157C13.9217 2.42143 14.9391 2 16 2C17.0609 2 18.0783 2.42143 18.8284 3.17157C19.5786 3.92172 20 4.93913 20 6V10"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  Network: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M16 10C18.2091 10 20 8.20914 20 6C20 3.79086 18.2091 2 16 2C13.7909 2 12 3.79086 12 6C12 8.20914 13.7909 10 16 10Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 20C8.20914 20 10 18.2091 10 16C10 13.7909 8.20914 12 6 12C3.79086 12 2 13.7909 2 16C2 18.2091 3.79086 20 6 20Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M26 20C28.2091 20 30 18.2091 30 16C30 13.7909 28.2091 12 26 12C23.7909 12 22 13.7909 22 16C22 18.2091 23.7909 20 26 20Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16 30C18.2091 30 20 28.2091 20 26C20 23.7909 18.2091 22 16 22C13.7909 22 12 23.7909 12 26C12 28.2091 13.7909 30 16 30Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M16 22V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10.5 18L6 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M21.5 18L26 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  API: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M16 2L3 9L16 16L29 9L16 2Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M3 23L16 30L29 23" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M3 16L16 23L29 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  Frontend: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M12 22L6 16L12 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M20 10L26 16L20 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18 6L14 26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  Backend: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M16 2C13.2386 2 11 4.23858 11 7C11 9.76142 13.2386 12 16 12C18.7614 12 21 9.76142 21 7C21 4.23858 18.7614 2 16 2Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16 20C13.2386 20 11 22.2386 11 25C11 27.7614 13.2386 30 16 30C18.7614 30 21 27.7614 21 25C21 22.2386 18.7614 20 16 20Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7 11C4.23858 11 2 13.2386 2 16C2 18.7614 4.23858 21 7 21C9.76142 21 12 18.7614 12 16C12 13.2386 9.76142 11 7 11Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M25 11C22.2386 11 20 13.2386 20 16C20 18.7614 22.2386 21 25 21C27.7614 21 30 18.7614 30 16C30 13.2386 27.7614 11 25 11Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  Database: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M16 8C22.6274 8 28 6.65685 28 5C28 3.34315 22.6274 2 16 2C9.37258 2 4 3.34315 4 5C4 6.65685 9.37258 8 16 8Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M28 16C28 17.66 22.63 19 16 19C9.37 19 4 17.66 4 16"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 5V27C4 28.66 9.37 30 16 30C22.63 30 28 28.66 28 27V5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  Container: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M27 11H5C3.89543 11 3 11.8954 3 13V25C3 26.1046 3.89543 27 5 27H27C28.1046 27 29 26.1046 29 25V13C29 11.8954 28.1046 11 27 11Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 11V7C9 5.93913 9.42143 4.92172 10.1716 4.17157C10.9217 3.42143 11.9391 3 13 3H19C20.0609 3 21.0783 3.42143 21.8284 4.17157C22.5786 4.92172 23 5.93913 23 7V11"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16 19C17.6569 19 19 17.6569 19 16C19 14.3431 17.6569 13 16 13C14.3431 13 13 14.3431 13 16C13 17.6569 14.3431 19 16 19Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  Default: (props: any) => (
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M16 2L4 10V22L16 30L28 22V10L16 2Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M16 16L28 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 16V30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 16L4 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+}
+
+export default function ProjectsPage() {
+  const { t } = useLanguage()
+  const [projects, setProjects] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await getProjects()
+      setProjects(data)
+      setIsLoading(false)
+    }
+
+    loadData()
+  }, [])
+
+  // Function to determine which icon to use based on project name or technologies
+  const getProjectIcon = (project: any) => {
+    const name = project.name.toLowerCase()
+    const techs = project.technologies.map((t: string) => t.toLowerCase())
+
+    // Check project name first
+    if (name.includes("secure") || name.includes("scanner") || name.includes("security")) {
+      return <IBMIcons.Security className="mr-3 text-emerald-500" />
+    }
+    if (name.includes("auth") || name.includes("guardian")) {
+      return <IBMIcons.Authentication className="mr-3 text-blue-500" />
+    }
+    if (name.includes("map") || name.includes("threat")) {
+      return <IBMIcons.Network className="mr-3 text-amber-500" />
+    }
+    if (name.includes("header") || name.includes("http")) {
+      return <IBMIcons.API className="mr-3 text-purple-500" />
+    }
+
+    // Then check technologies
+    if (techs.some((t) => t.includes("react") || t.includes("vue") || t.includes("angular"))) {
+      return <IBMIcons.Frontend className="mr-3 text-blue-500" />
+    }
+    if (techs.some((t) => t.includes("node") || t.includes("express"))) {
+      return <IBMIcons.Backend className="mr-3 text-green-500" />
+    }
+    if (techs.some((t) => t.includes("database") || t.includes("sql") || t.includes("mongo"))) {
+      return <IBMIcons.Database className="mr-3 text-blue-600" />
+    }
+    if (techs.some((t) => t.includes("docker") || t.includes("kubernetes"))) {
+      return <IBMIcons.Container className="mr-3 text-blue-400" />
+    }
+
+    // Default icon
+    return <IBMIcons.Default className="mr-3 text-gray-500" />
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  return (
+    <div className="container px-4 py-10 mx-auto">
+      <PageHeader
+        title={t.projects.title}
+        description={t.projects.description}
+        icon={<IBMIcons.Default className="w-10 h-10 text-primary" />}
+      />
+
+      <div className="grid gap-6 mt-10 md:grid-cols-2">
+        {projects.map((project) => (
+          <Card key={project.id} className="flex flex-col overflow-hidden">
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xl flex items-center">
+                  {getProjectIcon(project)}
+                  {project.name}
+                </CardTitle>
+                <div className="flex items-center space-x-2">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-sm text-primary hover:text-primary/80 transition-colors"
+                      title={t.projects.repo}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M16 2C8.27 2 2 8.27 2 16C2 22.14 6.07 27.36 11.75 29.24C12.5 29.37 12.78 28.92 12.78 28.51C12.78 28.14 12.76 26.82 12.76 25.69C9 26.48 8.12 24.95 7.84 24.15C7.68 23.72 7 22.49 6.5 22.12C6.08 21.82 5.33 21.03 6.48 21.02C7.55 21 8.32 21.98 8.62 22.42C9.82 24.39 11.67 24.2 12.83 23.79C12.96 22.92 13.34 22.34 13.76 22.01C10.56 21.68 7.22 20.52 7.22 15.38C7.22 13.83 7.76 12.55 8.64 11.53C8.5 11.15 8.02 9.8 8.78 7.85C8.78 7.85 9.91 7.44 12.77 9.25C13.83 8.91 14.95 8.74 16.07 8.74C17.19 8.74 18.31 8.91 19.37 9.25C22.23 7.43 23.36 7.85 23.36 7.85C24.12 9.8 23.64 11.15 23.5 11.53C24.38 12.55 24.92 13.82 24.92 15.38C24.92 20.54 21.57 21.68 18.37 22.01C18.9 22.42 19.36 23.21 19.36 24.44C19.36 26.19 19.34 28.01 19.34 28.51C19.34 28.92 19.62 29.38 20.37 29.24C23.2148 28.2935 25.6689 26.3932 27.3555 23.8551C29.042 21.3169 29.8826 18.2772 29.76 15.19C29.6374 12.1028 28.5682 9.13376 26.6893 6.75391C24.8105 4.37405 22.2171 2.72386 19.3085 2.05181C16.3998 1.37975 13.3511 1.72114 10.6685 3.02518C7.98582 4.32921 5.82306 6.51984 4.51987 9.20227C3.21667 11.8847 2.8751 14.9333 3.54695 17.842C4.2188 20.7506 5.86876 23.3442 8.24846 25.2232C10.6282 27.1022 13.5971 28.1716 16.6843 28.2944C19.7715 28.4172 22.8113 27.5768 25.3496 25.8905C27.8879 24.2042 29.7884 21.7502 30.735 18.915C30.9116 18.3223 31.0007 17.7106 31 17.096V16C31 13.0826 30.0518 10.2348 28.292 7.8567C26.5322 5.47856 24.0393 3.68126 21.1844 2.74649C18.3294 1.81172 15.2575 1.78693 12.387 2.6763C9.51648 3.56567 6.9903 5.32904 5.17157 7.67157C3.35284 10.0141 2.34315 12.8435 2.34315 15.761C2.34315 18.6784 3.35284 21.5078 5.17157 23.8503C6.9903 26.1929 9.51648 27.9562 12.387 28.8456C15.2575 29.735 18.3294 29.7102 21.1844 28.7754C24.0393 27.8406 26.5322 26.0433 28.292 23.6652C30.0518 21.2871 31 18.4393 31 15.5219V15.5219"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </a>
+                  )}
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-sm text-primary hover:text-primary/80 transition-colors"
+                      title={t.projects.demo}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M22 22H30V2H10V10"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M2 10H22V30H2V10Z"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="flex-grow">
+              <p className="mb-4">{project.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech: string, index: number) => (
+                  <Badge key={index} variant="secondary">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  )
+}
+
