@@ -57,7 +57,7 @@ export default function ProfileHeader({ profile }: ProfileHeaderProps) {
 
       <div className="relative w-32 h-32 overflow-hidden border-4 rounded-full border-primary">
         <Image
-          src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80"
+          src="/bayuncao.png"
           alt="Profile Avatar"
           fill
           className="object-cover"
@@ -86,14 +86,6 @@ export default function ProfileHeader({ profile }: ProfileHeaderProps) {
                 {skill}
               </Badge>
             ))}
-            {primarySkills.length > 5 && (
-              <Badge
-                variant="outline"
-                className="px-3 py-1 text-xs border-primary/30 hover:border-primary/60 transition-colors"
-              >
-                +{primarySkills.length - 5} {t.profile.more}
-              </Badge>
-            )}
           </div>
         </div>
 

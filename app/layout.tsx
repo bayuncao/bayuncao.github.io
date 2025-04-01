@@ -9,9 +9,9 @@ import LanguageSwitcher from "@/components/language-switcher"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Tech Blog",
-  description: "Personal blog for IT and InfoSec professionals",
-    generator: 'v0.dev'
+  title: "BayunCao Blog",
+  description: "bayuncao's blog",
+    generator: '@bayuncao'
 }
 
 export default function RootLayout({

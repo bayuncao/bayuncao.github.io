@@ -101,8 +101,8 @@ export const translations: Record<Language, Translations> = {
     stats: {
       projects: "Projects",
       papers: "Papers",
-      competitions: "Competitions",
-      presentations: "Presentations",
+      competitions: "Competition Experience",
+      presentations: "Technical Sharing",
     },
     experience: {
       title: "Experience",
@@ -173,8 +173,8 @@ export const translations: Record<Language, Translations> = {
     stats: {
       projects: "项目",
       papers: "论文",
-      competitions: "竞赛",
-      presentations: "演讲",
+      competitions: "比赛经历",
+      presentations: "技术分享",
     },
     experience: {
       title: "经历",

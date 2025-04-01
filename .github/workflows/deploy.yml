@@ -27,9 +27,37 @@ jobs:
         with:
           node-version: '18'
           cache: 'pnpm'
+          # 增加缓存 key，使用 pnpm-lock.yaml 的哈希值生成唯一缓存键
+          cache-dependency-path: '**/pnpm-lock.yaml'
+
+      # 提高缓存命中率的 pnpm 依赖缓存
+      - name: Cache pnpm dependencies 💾
+        uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: |
+            ~/.pnpm-store
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
 
       - name: Install dependencies 📦
+        # 如果缓存未命中才执行完整安装
+        if: steps.pnpm-cache.outputs.cache-hit != 'true'
         run: pnpm install
+
+      # 添加 Next.js 构建缓存
+      - name: Cache Next.js build 💾
+        uses: actions/cache@v3
+        with:
+          path: |
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}-
+            ${{ runner.os }}-nextjs-
 
       - name: Build 🔧
         run: pnpm run build
