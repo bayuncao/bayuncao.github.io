@@ -5,6 +5,10 @@ on:
     branches: [ main ]  # 当推送到 main 分支时触发
   workflow_dispatch:    # 允许手动触发
 
+# Add permissions to allow the workflow to push to GitHub Pages
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
